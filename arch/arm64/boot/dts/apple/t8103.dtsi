@@ -622,6 +622,7 @@
 			#iommu-cells = <1>;
 			interrupt-parent = <&aic>;
 			interrupts = <AIC_IRQ 696 IRQ_TYPE_LEVEL_HIGH>;
+			status = "disabled";
 		};
 
 		pcie0_dart_1: dart@682008000 {
@@ -630,6 +631,7 @@
 			#iommu-cells = <1>;
 			interrupt-parent = <&aic>;
 			interrupts = <AIC_IRQ 699 IRQ_TYPE_LEVEL_HIGH>;
+			status = "disabled";
 		};
 
 		pcie0_dart_2: dart@683008000 {
@@ -638,6 +640,7 @@
 			#iommu-cells = <1>;
 			interrupt-parent = <&aic>;
 			interrupts = <AIC_IRQ 702 IRQ_TYPE_LEVEL_HIGH>;
+			status = "disabled";
 		};
 
 		pcie0: pcie@690000000 {
@@ -693,6 +696,7 @@
 						<0 0 0 2 &port00 0 0 0 1>,
 						<0 0 0 3 &port00 0 0 0 2>,
 						<0 0 0 4 &port00 0 0 0 3>;
+				status = "disabled";
 			};
 
 			port01: pci@1,0 {
@@ -713,6 +717,7 @@
 						<0 0 0 2 &port01 0 0 0 1>,
 						<0 0 0 3 &port01 0 0 0 2>,
 						<0 0 0 4 &port01 0 0 0 3>;
+				status = "disabled";
 			};
 
 			port02: pci@2,0 {

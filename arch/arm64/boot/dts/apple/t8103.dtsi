@@ -476,6 +476,15 @@
 				apple,domain-name = "sio";
 			};
 
+			ps_spi_p: power-controller@218 {
+				compatible = "apple,t8103-pmgr-pwrstate", "apple,pmgr-pwrstate";
+				reg = <0x218>;
+				#power-domain-cells = <0>;
+				#reset-cells = <0>;
+				power-domains = <&ps_sio>;
+				apple,domain-name = "spi_p";
+			};
+
 			ps_uart_p: power-controller@220 {
 				compatible = "apple,t8103-pmgr-pwrstate", "apple,pmgr-pwrstate";
 				reg = <0x220>;
@@ -491,6 +500,15 @@
 				reg = <0x130>;
 				#power-domain-cells = <0>;
 				power-domains = <&ps_sio>;
+			};
+
+            ps_spi3: power-controller@258 {
+				compatible = "apple,t8103-pmgr-pwrstate", "apple,pmgr-pwrstate";
+				reg = <0x258>;
+				#power-domain-cells = <0>;
+				#reset-cells = <0>;
+				power-domains = <&ps_spi_p>;
+				apple,domain-name = "spi3";
 			};
 
 			ps_uart0: power-controller@270 {
@@ -562,6 +580,8 @@
 			reg = <0x2 0x3510c000 0x0 0x4000>;
 			interrupt-parent = <&aic>;
 			interrupts = <0 617 4>;
+            clocks = <&clkref>;
+            power-domains = <&ps_spi3>;
 			cs-gpios = <&pinctrl_ap 49 0>;
 			#address-cells = <1>;
 			#size-cells = <0>;
@@ -572,8 +592,7 @@
 				spi-max-frequency = <2000000>;
 				spien-gpios = <&pinctrl_ap 195 0>;
 				irq-gpios = <&pinctrl_nub 13 0>;
-				interrupt-parent = <&pinctrl_nub>;
-				interrupts = <13 8>;
+				interrupts-extended = <&pinctrl_nub 13 IRQ_TYPE_LEVEL_LOW>;
 			};
 		};
 
@@ -922,6 +941,7 @@
                         gpio-ranges = <&pinctrl_nub 0 212 23>;
 
                         interrupt-controller;
+                        #interrupt-cells = <2>;
                         interrupt-parent = <&aic>;
                         interrupts = <AIC_IRQ 330 IRQ_TYPE_LEVEL_HIGH>,
                                      <AIC_IRQ 331 IRQ_TYPE_LEVEL_HIGH>,
